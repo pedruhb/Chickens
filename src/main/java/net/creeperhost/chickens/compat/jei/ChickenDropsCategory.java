@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.compat.jei;
+/*package net.creeperhost.chickens.compat.jei;
 
 import net.creeperhost.chickens.ChickensMod;
 import mezz.jei.api.constants.VanillaTypes;
@@ -97,3 +97,4 @@ public class ChickenDropsCategory implements IRecipeCategory<ChickenDropsCategor
         }
     }
 }
+*/
