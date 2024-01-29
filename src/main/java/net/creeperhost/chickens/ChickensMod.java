@@ -19,6 +19,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,7 +52,7 @@ public class ChickensMod
     {
         event.enqueueWork(() -> ConfigHandler.MAP.forEach((chickensRegistryItem, s) ->
         {
-            ItemStack stack = new ItemStack(Registry.ITEM.get(new ResourceLocation(s.getItem())));
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s.getItem())));
             if(stack.isEmpty())
             {
                 LOGGER.error("unable to get itemstack for " + chickensRegistryItem.getRegistryName() + " for itemstack: " + s);

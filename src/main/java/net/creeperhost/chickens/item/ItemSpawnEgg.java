@@ -7,20 +7,16 @@ import net.creeperhost.chickens.registry.ChickensRegistry;
 import net.creeperhost.chickens.registry.ChickensRegistryItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 
@@ -31,7 +27,7 @@ public class ItemSpawnEgg extends Item implements IColorSource
         super(properties);
     }
 
-    @Override
+    /*@Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> subItems)
     {
         if (this.allowdedIn(tab))
@@ -43,14 +39,14 @@ public class ItemSpawnEgg extends Item implements IColorSource
                 subItems.add(itemstack);
             }
         }
-    }
+    }*/
 
     @Override
     public Component getName(ItemStack stack)
     {
         ChickensRegistryItem chickenDescription = ChickensRegistry.getByRegistryName(getTypeFromStack(stack));
-        if (chickenDescription == null) return new TextComponent("nul1");
-        return new TranslatableComponent("entity.chickens." + chickenDescription.getEntityName());
+        if (chickenDescription == null) return Component.literal("nul1");
+        return Component.translatable("entity.chickens." + chickenDescription.getEntityName());
     }
 
     @Override
@@ -95,11 +91,11 @@ public class ItemSpawnEgg extends Item implements IColorSource
     public static void activate(ItemStack stack, Level worldIn, BlockPos pos)
     {
         ResourceLocation entityName = ResourceLocation.tryParse(getTypeFromStack(stack));
-        EntityChickensChicken entity = (EntityChickensChicken) Registry.ENTITY_TYPE.get(entityName).create(worldIn);
+        EntityChickensChicken entity = (EntityChickensChicken) ForgeRegistries.ENTITY_TYPES.getValue(entityName).create(worldIn);
         if(entity != null && stack.getTag() != null)
         {
             if(stack.getTag().contains("baby"))
-               entity.setBaby(stack.getTag().getBoolean("baby"));
+                entity.setBaby(stack.getTag().getBoolean("baby"));
             if(stack.getTag().contains("love"))
                 entity.setInLoveTime(stack.getTag().getInt("love"));
         }
