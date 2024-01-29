@@ -33,6 +33,7 @@ public class BlockHenhouse extends BaseEntityBlock
 
     public BlockHenhouse()
     {
+        // teste
         super(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).strength(2.0F));
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
