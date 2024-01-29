@@ -72,7 +72,7 @@ public class ChickensMod
 
     private void clientInit(final FMLClientSetupEvent event)
     {
-        ModScreens.init();
+        //ModScreens.init();
         event.enqueueWork(ChickensClient::init);
     }
 

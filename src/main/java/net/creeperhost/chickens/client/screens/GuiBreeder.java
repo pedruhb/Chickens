@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.client.screens;
+/*package net.creeperhost.chickens.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,9 +13,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by setyc on 06.03.2016.
- */
 @OnlyIn(Dist.CLIENT)
 public class GuiBreeder extends AbstractContainerScreen<ContainerBreeder>
 {
@@ -68,3 +65,4 @@ public class GuiBreeder extends AbstractContainerScreen<ContainerBreeder>
         return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
     }
 }
+*/

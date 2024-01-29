@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.client.screens;
+/*package net.creeperhost.chickens.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -49,3 +49,4 @@ public class GuiHenhouse extends AbstractContainerScreen<ContainerHenhouse>
         renderTooltip(poseStack, mouseX, mouseY);
     }
 }
+*/

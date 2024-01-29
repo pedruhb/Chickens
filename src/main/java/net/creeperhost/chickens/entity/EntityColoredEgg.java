@@ -11,13 +11,8 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
-<<<<<<< HEAD
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.registries.ForgeRegistries;
-=======
 import net.minecraftforge.registries.ForgeRegistries;
 
->>>>>>> edb01ed7ad2ab4c923e8d6133e40719b5d7f2bd0
 import org.jetbrains.annotations.NotNull;
 
 public class EntityColoredEgg extends ThrowableItemProjectile
@@ -69,13 +64,8 @@ public class EntityColoredEgg extends ThrowableItemProjectile
         super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         int i = entity instanceof Blaze ? 3 : 0;
-<<<<<<< HEAD
-        entity.hurt(damageSources().thrown(this, this.getOwner()), (float) i);
-    }
-=======
         entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) i);
     }*/
->>>>>>> edb01ed7ad2ab4c923e8d6133e40719b5d7f2bd0
 
     @Override
     public void onHit(@NotNull HitResult hitResult)

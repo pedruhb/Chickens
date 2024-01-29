@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.init;
+/*package net.creeperhost.chickens.init;
 
 import net.creeperhost.chickens.client.screens.GuiBreeder;
 import net.creeperhost.chickens.client.screens.GuiHenhouse;
@@ -14,3 +14,4 @@ public class ModScreens
         MenuScreens.register(ModContainers.ROOST_CONTAINER.get(), GuiRoost::new);
     }
 }
+*/
