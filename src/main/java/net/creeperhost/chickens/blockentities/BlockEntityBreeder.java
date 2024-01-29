@@ -18,7 +18,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -39,9 +39,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -139,14 +141,14 @@ public class BlockEntityBreeder extends BlockEntity implements MenuProvider
                 }
                 ItemStack chickenStack = new ItemStack(ModItems.CHICKEN_ITEM.get());
                 ItemChicken.applyEntityIdToItemStack(chickenStack, baby.getRegistryName());
-                ChickenStats babyStats = increaseStats(chickenStack, inventory.getStackInSlot(0), inventory.getStackInSlot(1), level.random);
+                ChickenStats babyStats = increaseStats(chickenStack, inventory.getStackInSlot(0), inventory.getStackInSlot(1), null);
                 babyStats.write(chickenStack);
                 chickenStack.setCount(1);
                 ItemStack inserted = moveOutput(chickenStack);
                 if(inserted.isEmpty())
                 {
                     level.playSound(null, getBlockPos(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 0.5F, 0.8F);
-                    spawnParticle(level, getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), level.random);
+                    spawnParticle(level, getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), null);
                     inventory.getStackInSlot(2).shrink(1);
                     progress = 0;
                 }
@@ -246,7 +248,8 @@ public class BlockEntityBreeder extends BlockEntity implements MenuProvider
     
     public static ResourceLocation getRegistryName(ItemStack stack)
     {
-        return Registry.ITEM.getKey(stack.getItem());
+//        return Registry.ITEM.getKey(stack.getItem());
+        return ForgeRegistries.ITEMS.getKey(stack.getItem());
     }
 
     private static ChickensRegistryItem getChickenFromStack(ItemStack stack)
@@ -290,7 +293,8 @@ public class BlockEntityBreeder extends BlockEntity implements MenuProvider
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, final @Nullable Direction side)
     {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
+
         {
             return LazyOptional.of(() -> inventory).cast();
         }
@@ -316,7 +320,7 @@ public class BlockEntityBreeder extends BlockEntity implements MenuProvider
     @Override
     public @NotNull Component getDisplayName()
     {
-        return new TextComponent("chickens.container.breeder");
+        return Component.literal("chickens.container.breeder");
     }
 
     @org.jetbrains.annotations.Nullable
