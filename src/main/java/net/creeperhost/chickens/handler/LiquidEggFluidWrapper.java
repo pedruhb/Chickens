@@ -1,22 +1,19 @@
 package net.creeperhost.chickens.handler;
 
 import net.creeperhost.chickens.item.ItemLiquidEgg;
-import net.creeperhost.chickens.registry.LiquidEggRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class LiquidEggFluidWrapper implements IFluidHandler, IFluidHandlerItem, ICapabilityProvider
+public class LiquidEggFluidWrapper implements IFluidHandlerItem, ICapabilityProvider
 {
     private final ItemStack container;
 
@@ -29,10 +26,10 @@ public class LiquidEggFluidWrapper implements IFluidHandler, IFluidHandlerItem, 
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability)
     {
-        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if (capability == ForgeCapabilities.FLUID_HANDLER) {
             return LazyOptional.of(() -> this).cast();
         }
-        if (capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY) {
+        if (capability == ForgeCapabilities.FLUID_HANDLER_ITEM) {
             return LazyOptional.of(() -> this).cast();
         }
         return LazyOptional.empty();

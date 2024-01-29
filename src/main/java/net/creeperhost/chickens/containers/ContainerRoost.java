@@ -52,7 +52,7 @@ public class ContainerRoost extends ContainerBase
     @Override
     public boolean stillValid(Player player)
     {
-        return player.level.getBlockEntity(roost.getBlockPos()) != null;
+        return player.level().getBlockEntity(roost.getBlockPos()) != null;
     }
 
     public int getProgress()

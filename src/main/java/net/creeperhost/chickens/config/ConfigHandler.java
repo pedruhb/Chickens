@@ -11,6 +11,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.File;
 import java.util.*;
@@ -129,7 +130,7 @@ public class ConfigHandler
 
                         String parent1Name = stringJsonElementEntry.getValue().getAsJsonObject().getAsJsonPrimitive("parent_1").getAsString();
                         String parent2Name = stringJsonElementEntry.getValue().getAsJsonObject().getAsJsonPrimitive("parent_2").getAsString();
-                        ItemStack stack1 = new ItemStack(Registry.ITEM.get(new ResourceLocation(stack)));
+                        ItemStack stack1 = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack)));
 
                         ChickensRegistryItem chickensRegistryItem = new ChickensRegistryItem(new ResourceLocation(ChickensMod.MODID, name), name, new ResourceLocation("chickens", "textures/entity/" + name + ".png"), stack1, 0, 0);
                         SpawnType spawnType = SpawnType.valueOf(spawn_type);

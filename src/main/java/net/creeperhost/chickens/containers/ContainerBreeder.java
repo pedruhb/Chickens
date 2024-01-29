@@ -56,7 +56,7 @@ public class ContainerBreeder extends ContainerBase
     @Override
     public boolean stillValid(Player player)
     {
-        return player.level.getBlockEntity(breeder.getBlockPos()) != null;
+        return player.level().getBlockEntity(breeder.getBlockPos()) != null;
     }
 
     public int getProgress()
