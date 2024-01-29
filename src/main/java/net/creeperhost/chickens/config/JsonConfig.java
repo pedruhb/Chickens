@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import net.creeperhost.chickens.handler.ItemHolder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -15,37 +12,45 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class JsonConfig {
+public class JsonConfig
+{
     boolean hasChanged = false;
 
     private File configFile;
     private JsonObject json;
     private Gson gson;
 
-    public JsonConfig(File file) {
+    public JsonConfig(File file)
+    {
         configFile = file;
         gson = new Gson();
         json = new JsonObject();
     }
 
-    public void Save() {
+    public void Save()
+    {
         WriteFile();
         hasChanged = false;
     }
 
-    public void Load() {
-        try {
+    public void Load()
+    {
+        try
+        {
             SetupFile();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
         json = ReadFile();
     }
 
-    public JsonObject getFullJson() {
+    public JsonObject getFullJson()
+    {
         return this.json;
     }
+
 
     /**
      * Returns one of the base Categories of the Json Object <br>
@@ -54,17 +59,21 @@ public class JsonConfig {
      * @param categoryProperty
      * @return
      */
-    public JsonObject getCategory(String categoryProperty) {
+    public JsonObject getCategory(String categoryProperty)
+    {
         JsonObject object = new JsonObject();
 
-        if (json.has(categoryProperty)) {
+        if (json.has(categoryProperty))
+        {
             object = json.getAsJsonObject(categoryProperty);
-        } else {
+        } else
+        {
             json.add(categoryProperty, object);
             setHasChanged(true);
         }
         return object;
     }
+
 
     /**
      * Get or set a boolean
@@ -74,17 +83,21 @@ public class JsonConfig {
      * @param value
      * @return
      */
-    public boolean getBoolean(String categoryProperty, String property, boolean value) {
+    public boolean getBoolean(String categoryProperty, String property, boolean value)
+    {
         JsonObject object = getCategory(categoryProperty);
 
-        if (object.has(property)) {
+        if (object.has(property))
+        {
             value = object.get(property).getAsBoolean();
-        } else {
+        } else
+        {
             object.addProperty(property, value);
             setHasChanged(true);
         }
         return value;
     }
+
 
     /**
      * Get or Set a String Object
@@ -94,19 +107,23 @@ public class JsonConfig {
      * @param value
      * @return
      */
-    public String getString(String categoryProperty, String property, String value) {
+    public String getString(String categoryProperty, String property, String value)
+    {
 
         JsonObject object = getCategory(categoryProperty);
 
-        if (object.has(property)) {
+        if (object.has(property))
+        {
             value = object.get(property).getAsString();
-        } else {
+        } else
+        {
             object.addProperty(property, value);
             setHasChanged(true);
         }
 
         return value;
     }
+
 
     /**
      * Get or set a Float Object
@@ -118,44 +135,63 @@ public class JsonConfig {
      * @param max
      * @return
      */
-    public float getFloat(String categoryProperty, String property, float value, float min, float max) {
+    public float getFloat(String categoryProperty, String property, float value, float min, float max)
+    {
 
         JsonObject object = getCategory(categoryProperty);
-        if (object.has(property)) {
+        if (object.has(property))
+        {
             value = object.get(property).getAsFloat();
-        } else {
+        } else
+        {
             object.addProperty(property, value);
             setHasChanged(true);
         }
 
-        if (value > max)
-            value = max;
-        if (value < min)
-            value = min;
+        if (value > max) value = max;
+        if (value < min) value = min;
 
         return value;
     }
 
+
     @Nullable
-    public ItemHolder getItemHolder(String categoryProperty, String property, ItemHolder defaultItemHolder) {
+    public ItemHolder getItemHolder(String categoryProperty, String property, ItemHolder defaultItemHolder)
+    {
         JsonObject object = getCategory(categoryProperty);
         ItemHolder holder = defaultItemHolder;
         boolean useDefault = true;
 
-        if (object.has(property)) {
-            holder.readJsonObject(object.get(property).getAsJsonObject());
-            useDefault = false;
+        if (object.has(property))
+        {
+            if (object.get(property).isJsonObject())
+            {
+                holder.readJsonObject(object.get(property).getAsJsonObject());
+                useDefault = false;
+            } else
+            {
+                // Use old code reader to update old configs
+                ItemStack oldItemStack = getItemStack(categoryProperty, property, defaultItemHolder.getStack());
+                if (oldItemStack != null)
+                {
+                    object.add(property, holder.writeJsonObject(new JsonObject()));
+                    useDefault = false;
+                    setHasChanged(true);
+                }
+            }
         }
 
-        if (useDefault) {
+        if (useDefault)
+        {
             object.add(property, holder.writeJsonObject(new JsonObject()));
             setHasChanged(true);
         }
 
-        // System.out.println(holder.toString());
+        //System.out.println(holder.toString());
 
         return holder;
     }
+
 
     /**
      * Get or Set an ItemStack
@@ -167,12 +203,15 @@ public class JsonConfig {
      */
     @Nullable
     @Deprecated
-    public ItemStack getItemStack(String categoryProperty, String property, ItemStack stack) {
+    public ItemStack getItemStack(String categoryProperty, String property, ItemStack stack)
+    {
         JsonObject object = getCategory(categoryProperty);
 
-        if (object.has(property)) {
+        if (object.has(property))
+        {
             stack = getItemStackFromID(object.get(property).getAsString());
-        } else {
+        } else
+        {
             object.addProperty(property, getIDfromItemStack(stack));
             setHasChanged(true);
         }
@@ -180,11 +219,14 @@ public class JsonConfig {
         return stack;
     }
 
-    public boolean hasChanged() {
+
+    public boolean hasChanged()
+    {
         return this.hasChanged;
     }
 
-    protected void setHasChanged(boolean val) {
+    protected void setHasChanged(boolean val)
+    {
         this.hasChanged = val;
     }
 
@@ -193,8 +235,10 @@ public class JsonConfig {
      *
      * @throws IOException
      */
-    private void SetupFile() throws IOException {
-        if (!configFile.exists()) {
+    private void SetupFile() throws IOException
+    {
+        if (!configFile.exists())
+        {
             hasChanged = true;
             configFile.getParentFile().mkdirs();
             configFile.createNewFile();
@@ -206,32 +250,39 @@ public class JsonConfig {
      *
      * @return
      */
-    protected JsonObject ReadFile() {
+    protected JsonObject ReadFile()
+    {
 
         JsonObject obj = new JsonObject();
 
-        try {
+        try
+        {
             FileReader fr = new FileReader(configFile);
             JsonObject jsonobject = gson.fromJson(fr, JsonObject.class);
             fr.close();
 
             return jsonobject != null ? jsonobject : obj;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             throw new RuntimeException("Error " + e.getCause() + " loading file: " + configFile.getPath());
         }
     }
 
+
     /**
      * Takes the json and writes it to a file.
      */
-    protected void WriteFile() {
-        try {
+    protected void WriteFile()
+    {
+        try
+        {
             FileWriter fw = new FileWriter(configFile);
             new GsonBuilder().setPrettyPrinting().create().toJson(json, fw);
             fw.flush();
             fw.close();
-        } catch (IOException ioexception) {
+        } catch (IOException ioexception)
+        {
             ioexception.printStackTrace();
         }
     }
@@ -242,16 +293,10 @@ public class JsonConfig {
      * @param stack
      * @return
      */
-    protected static String getIDfromItemStack(ItemStack stack) {
-
-        ResourceLocation rl = ForgeRegistries.ITEMS.getKey(stack.getItem());
-
-        ForgeRegistries.ITEMS.getRegistryName();
-
-        return "" + stack.getItem().getId(stack.getItem());
-        // return stack.getItem().getRegistryName() + (stack.getDamageValue() != 0 ||
-        // stack.getCount() > 1 ? ":" + stack.getDamageValue() + (stack.getCount() > 1 ?
-        // ":" + stack.getCount() : "") : "");
+    protected static String getIDfromItemStack(ItemStack stack)
+    {
+        return stack.getItem().toString();
+        //return stack.getItem().getRegistryName() + (stack.getDamageValue() != 0 || stack.getCount() > 1 ? ":" + stack.getDamageValue() + (stack.getCount() > 1 ? ":" + stack.getCount() : "") : "");
     }
 
     /**
@@ -260,44 +305,46 @@ public class JsonConfig {
      * @param itemID
      * @return
      */
-    // TODO
+    //TODO
     @Nullable
-    protected static ItemStack getItemStackFromID(String itemID) {
+    protected static ItemStack getItemStackFromID(String itemID)
+    {
         return ItemStack.EMPTY;
-        // String[] args = itemID.split(":");
-        //
-        // ItemStack stack = null;
-        // Item item = null;
-        // int meta = 0;
-        // int qty = 1;
-        //
-        // if(args.length >= 2) {
-        // item = Item.getByNameOrId(args[0] +":"+ args[1]);
-        // }
-        //
-        // if(args.length >= 3){
-        // try{
-        // meta = Integer.parseInt(args[2]);
-        // } catch(Exception e) {
-        // ChickensMod.log.error("Could not parse meta value: "+ itemID);
-        // }
-        // }
-        //
-        // if(args.length == 4) {
-        // try {
-        // qty = Integer.parseInt(args[3]);
-        // } catch(Exception e) {
-        // ChickensMod.log.error("Could not parse qty value: "+ itemID);
-        // }
-        // }
-        //
-        // if(item != null) {
-        // stack = new ItemStack(item, qty);
-        // } else {
-        // ChickensMod.log.error("Item could not be Found: "+ itemID);
-        // }
-        //
-        // return stack;
+//		String[] args = itemID.split(":");
+//
+//		ItemStack stack = null;
+//		Item item = null;
+//		int meta = 0;
+//		int qty = 1;
+//
+//		if(args.length >= 2) {
+//			item = Item.getByNameOrId(args[0] +":"+ args[1]);
+//		}
+//
+//		if(args.length >= 3){
+//			try{
+//				meta = Integer.parseInt(args[2]);
+//			} catch(Exception e) {
+//				ChickensMod.log.error("Could not parse meta value: "+ itemID);
+//			}
+//		}
+//
+//		if(args.length == 4) {
+//			try {
+//				qty = Integer.parseInt(args[3]);
+//			} catch(Exception e) {
+//				ChickensMod.log.error("Could not parse qty value: "+ itemID);
+//			}
+//		}
+//
+//		if(item != null) {
+//			stack = new ItemStack(item, qty);
+//		} else {
+//			ChickensMod.log.error("Item could not be Found: "+ itemID);
+//		}
+//
+//		return stack;
     }
+
 
 }
