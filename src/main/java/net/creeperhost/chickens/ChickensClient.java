@@ -18,7 +18,7 @@ public class ChickensClient
     public static void init()
     {
         ItemProperties.register(ModItems.CHICKEN_ITEM.get(), new ResourceLocation(ChickensMod.MODID, ""), RenderChickenItem.getInstance());
-
+        Minecraft.getInstance().getItemColors().register(null, null);
         Minecraft.getInstance().getItemColors().register(new ItemColorHandler(), ModItems.SPAWN_EGG.get(), ModItems.COLOURED_EGG.get(), ModItems.LIQUID_EGG.get());
         BlockEntityRenderers.register(ModBlocks.ROOST_TILE.get(), p_173571_ -> new RenderRoost());
     }
