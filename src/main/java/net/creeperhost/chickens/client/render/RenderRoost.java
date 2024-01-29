@@ -2,7 +2,7 @@ package net.creeperhost.chickens.client.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.creeperhost.chickens.block.BlockRoost;
 import net.creeperhost.chickens.blockentities.BlockEntityRoost;
 import net.creeperhost.chickens.entity.EntityChickensChicken;
@@ -16,6 +16,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class RenderRoost implements BlockEntityRenderer<BlockEntityRoost>
@@ -36,7 +37,7 @@ public class RenderRoost implements BlockEntityRenderer<BlockEntityRoost>
             ResourceLocation resourceLocation = ResourceLocation.tryParse(id);
             if(resourceLocation == null) return;
 
-            EntityType<?> entityType = Registry.ENTITY_TYPE.get(resourceLocation);
+            EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(resourceLocation);
             if(entityType == null || entityType == EntityType.PIG) return;
 
             if(Minecraft.getInstance().level == null) return;
@@ -50,7 +51,7 @@ public class RenderRoost implements BlockEntityRenderer<BlockEntityRoost>
             poseStack.scale(0.9F, 0.85F, 0.9F);
             Direction direction = blockEntityRoost.getBlockState().getValue(BlockRoost.FACING);
             poseStack.mulPose(direction.getRotation());
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(270));
+            poseStack.mulPose(Axis.XP.rotationDegrees(270));
 
 
             EntityRenderDispatcher entityRenderDispatcher = mc.getEntityRenderDispatcher();
