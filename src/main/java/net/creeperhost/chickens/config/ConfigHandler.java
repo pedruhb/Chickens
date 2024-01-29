@@ -7,7 +7,6 @@ import net.creeperhost.chickens.handler.ItemHolder;
 import net.creeperhost.chickens.handler.SpawnType;
 import net.creeperhost.chickens.registry.ChickensRegistry;
 import net.creeperhost.chickens.registry.ChickensRegistryItem;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
