@@ -22,7 +22,11 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
+<<<<<<< Updated upstream
     mappings channel: 'official', version: '1.18.2'
+=======
+    mappings channel: 'official', version: '1.20'
+>>>>>>> Stashed changes
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
@@ -87,10 +91,28 @@ dependencies {
 //    theoneprobe-1.18-5.1.0.jar
     implementation fg.deobf("theoneprobe:theoneprobe:1.18-5.1.0")
 
+<<<<<<< Updated upstream
     compileOnly fg.deobf("mezz.jei:jei-${project.mc_version}:${project.jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.mc_version}:${project.jei_version}")
 
 //    implementation fg.deobf("mcjty.theoneprobe:TheOneProbe-${project.mc_version}:${project.mc_version}-${probe_version}")
+=======
+    compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${project.jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${project.jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}")
+
+//    implementation fg.deobf("mcjty.theoneprobe:TheOneProbe-${project.mc_version}:${project.mc_version}-${probe_version}")
+//    implementation "dev.architectury:architectury:${rootProject.architectury_version}"
+
+//    implementation(fg.deobf("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}"))
+
+//    implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}")
+
+    implementation fg.deobf("dev.architectury:architectury-forge:${rootProject.architectury_version}")
+    //implementation fg.deobf("net.creeperhost:polylib-forge:${rootProject.polylib_version}")
+
+    modRuntimeOnly "net.creeperhost:polylib-forge:${rootProject.polylib_version}"
+>>>>>>> Stashed changes
 
 }
 
