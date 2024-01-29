@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[40,]" #mandatory
+loaderVersion="[46,]" #mandatory
 license="MIT Licence"
 credits="" #optional
 authors="CreeperHost, gigabit101" #optional
@@ -17,12 +17,7 @@ authors="CreeperHost, gigabit101" #optional
 [[dependencies.chickens]]
     modId="minecraft"
     mandatory=true
-<<<<<<< Updated upstream
-    versionRange="[1.18.2]"
-    ordering="NONE"
-    side="BOTH"
-=======
-    versionRange="[1.20]"
+    versionRange="[1.20.1]"
     ordering="NONE"
     side="BOTH"
 
@@ -32,4 +27,3 @@ authors="CreeperHost, gigabit101" #optional
 #    versionRange="[2000,)"
 #    ordering="NONE"
 #    side="BOTH"
->>>>>>> Stashed changes
