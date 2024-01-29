@@ -18,6 +18,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.Random;
 
 public class ModEntities
 {
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registry.ENTITY_TYPE_REGISTRY, ChickensMod.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ChickensMod.MODID);
     public static final RegistryObject<EntityType<EntityColoredEgg>> EGG = ENTITIES.register("egg", () -> EntityType.Builder.<EntityColoredEgg>of(EntityColoredEgg::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("egg"));
     public static final List<EntityType<?>> SPAWNABLE_CHICKENS = new ArrayList<>();
 
@@ -39,8 +40,7 @@ public class ModEntities
             if(item.canSpawn())
             {
                 SPAWNABLE_CHICKENS.add(entityType);
-                SpawnPlacements.register(entityType, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (p_21781_, p_21782_, p_21783_, p_21784_, p_21785_)
-                        -> checkAnimalSpawnRules(p_21781_, p_21782_, p_21783_, p_21784_, p_21785_, item));
+                //SpawnPlacements.register(entityType, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (p_21781_, p_21782_, p_21783_, p_21784_, p_21785_) -> checkAnimalSpawnRules(p_21781_, p_21782_, p_21783_, p_21784_, p_21785_, item));
             }
         }
     }
