@@ -25,7 +25,7 @@ public class ChickensCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> CHICKENS_BLOCKS = CREATIVE_MODE_TABS.register("chickens_blocks_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.HEN_HOUSE_ITEM.get().getDefaultInstance())
+            .icon(() -> ModItems.BREEDER.get().getDefaultInstance())
             .build());
             
 }

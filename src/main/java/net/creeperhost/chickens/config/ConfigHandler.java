@@ -159,7 +159,7 @@ public class ConfigHandler
 
     public static void loadChickens(Collection<ChickensRegistryItem> allChickens)
     {
-        loadChickensFromFile(ChickensFile, allChickens);
+        //loadChickensFromFile(ChickensFile, allChickens);
     }
 
     private static String getChickenParent(JsonConfig configuration, String propertyName, Collection<ChickensRegistryItem> allChickens, ChickensRegistryItem chicken, ChickensRegistryItem parent)

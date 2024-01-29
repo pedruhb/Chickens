@@ -22,12 +22,12 @@ public class ModItems
     public static final RegistryObject<Item> CHICKEN_ITEM = ITEMS.register("chicken_item", () -> new ItemChicken(new Item.Properties().stacksTo(16)));
     public static final RegistryObject<Item> CATCHER_ITEM = ITEMS.register("catcher", () -> new ItemChickenCatcher(new Item.Properties()));
 
-    public static final RegistryObject<Item> HEN_HOUSE_ITEM = ITEMS.register("henhouse", () -> new BlockItem(ModBlocks.HEN_HOUSE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEN_HOUSE_ACACIA_ITEM = ITEMS.register("henhouse_acacia", () -> new BlockItem(ModBlocks.HEN_HOUSE_ACACIA.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEN_HOUSE_BIRCH_ITEM = ITEMS.register("henhouse_birch", () -> new BlockItem(ModBlocks.HEN_HOUSE_BIRCH.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEN_HOUSE_DARK_OAK_ITEM = ITEMS.register("henhouse_dark_oak", () -> new BlockItem(ModBlocks.HEN_HOUSE_DARK_OAK.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEN_HOUSE_JUNGLE_ITEM = ITEMS.register("henhouse_jungle", () -> new BlockItem(ModBlocks.HEN_HOUSE_JUNGLE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> HEN_HOUSE_SPRUCE_ITEM = ITEMS.register("henhouse_spruce", () -> new BlockItem(ModBlocks.HEN_HOUSE_SPRUCE.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_ITEM = ITEMS.register("henhouse", () -> new BlockItem(ModBlocks.HEN_HOUSE.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_ACACIA_ITEM = ITEMS.register("henhouse_acacia", () -> new BlockItem(ModBlocks.HEN_HOUSE_ACACIA.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_BIRCH_ITEM = ITEMS.register("henhouse_birch", () -> new BlockItem(ModBlocks.HEN_HOUSE_BIRCH.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_DARK_OAK_ITEM = ITEMS.register("henhouse_dark_oak", () -> new BlockItem(ModBlocks.HEN_HOUSE_DARK_OAK.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_JUNGLE_ITEM = ITEMS.register("henhouse_jungle", () -> new BlockItem(ModBlocks.HEN_HOUSE_JUNGLE.get(), new Item.Properties()));
+    //public static final RegistryObject<Item> HEN_HOUSE_SPRUCE_ITEM = ITEMS.register("henhouse_spruce", () -> new BlockItem(ModBlocks.HEN_HOUSE_SPRUCE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> BREEDER = ITEMS.register("breeder", () -> new BlockItem(ModBlocks.BREEDER.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROOST = ITEMS.register("roost", () -> new BlockItem(ModBlocks.ROOST.get(), new Item.Properties()));
@@ -59,7 +59,7 @@ public class ModItems
             event.accept(this.CATCHER_ITEM.get());
         }
 
-        if (event.getTabKey() == ChickensCreativeTabs.CHICKENS_BLOCKS.getKey()) {
+        /* if (event.getTabKey() == ChickensCreativeTabs.CHICKENS_BLOCKS.getKey()) {
             event.accept(this.HEN_HOUSE_ITEM.get());
         }
 
@@ -81,7 +81,7 @@ public class ModItems
         
         if (event.getTabKey() == ChickensCreativeTabs.CHICKENS_BLOCKS.getKey()) {
             event.accept(this.HEN_HOUSE_SPRUCE_ITEM.get());
-        }
+        } */
 
         if (event.getTabKey() == ChickensCreativeTabs.CHICKENS_BLOCKS.getKey()) {
             event.accept(this.BREEDER.get());

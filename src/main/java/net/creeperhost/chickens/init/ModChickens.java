@@ -26,7 +26,7 @@ public class ModChickens
     {
         List<ChickensRegistryItem> chickens = new ArrayList<ChickensRegistryItem>();
 
-        chickens.add(new ChickensRegistryItem(ChickensRegistry.SMART_CHICKEN_ID, "smart_chicken", new ResourceLocation("chickens", "textures/entity/smart_chicken.png"), new ItemStack(Items.EGG), 0xffffff, 0xffff00).setSpawnType(SpawnType.NONE));
+        /*chickens.add(new ChickensRegistryItem(ChickensRegistry.SMART_CHICKEN_ID, "smart_chicken", new ResourceLocation("chickens", "textures/entity/smart_chicken.png"), new ItemStack(Items.EGG), 0xffffff, 0xffff00).setSpawnType(SpawnType.NONE));
 
         // dye chickens
         ChickensRegistryItem whiteChicken = createDyeChicken(DyeColor.WHITE, "white_chicken").setDropItem(new ItemStack(Items.BONE)).setSpawnType(SpawnType.NORMAL);
@@ -152,7 +152,7 @@ public class ModChickens
 
         ChickensRegistryItem soulSandChicken = new ChickensRegistryItem(new ResourceLocation(ChickensMod.MODID, "soulsand_chicken"), "soulsand_chicken", new ResourceLocation("chickens", "textures/entity/soulsand_chicken.png"), new ItemStack(Blocks.SOUL_SAND, 1), 0x453125, 0xd52f08).setSpawnType(SpawnType.HELL);
         chickens.add(soulSandChicken);
-
+*/
         return chickens;
     }
 

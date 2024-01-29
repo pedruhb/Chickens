@@ -1,6 +1,5 @@
 package net.creeperhost.chickens.entity;
 
-import net.creeperhost.chickens.blockentities.BlockEntityHenhouse;
 import net.creeperhost.chickens.registry.ChickensRegistry;
 import net.creeperhost.chickens.registry.ChickensRegistryItem;
 import net.minecraft.nbt.CompoundTag;
@@ -126,7 +125,7 @@ public class EntityChickensChicken extends Chicken
          */
 
          return ChickensRegistry.getByResourceLocation(ChickensRegistry.SMART_CHICKEN_ID);
-         
+
     }
 
     public int getTier()
@@ -213,7 +212,7 @@ public class EntityChickensChicken extends Chicken
                     itemToLay.grow(chickenDescription.createLayItem().getCount());
                 }
 
-                itemToLay = BlockEntityHenhouse.pushItemStack(itemToLay, level(), new Vec3(getX(), getY(), getZ()));
+                //itemToLay = BlockEntityHenhouse.pushItemStack(itemToLay, level(), new Vec3(getX(), getY(), getZ()));
 
                 if (itemToLay != null && !itemToLay.isEmpty())
                 {

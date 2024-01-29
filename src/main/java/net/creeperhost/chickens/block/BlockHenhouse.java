@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.block;
+/*package net.creeperhost.chickens.block;
 
 import net.creeperhost.chickens.blockentities.BlockEntityHenhouse;
 import net.creeperhost.chickens.blockentities.BlockEntityRoost;
@@ -98,3 +98,4 @@ public class BlockHenhouse extends BaseEntityBlock
         return InteractionResult.SUCCESS;
     }
 }
+*/

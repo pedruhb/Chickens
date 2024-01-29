@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.containers;
+/* package net.creeperhost.chickens.containers;
 
 import net.creeperhost.chickens.blockentities.BlockEntityHenhouse;
 import net.creeperhost.chickens.init.ModContainers;
@@ -82,3 +82,4 @@ public class ContainerHenhouse extends ContainerBase
         return this.data.get(0);
     }
 }
+ */

@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.blockentities;
+/*package net.creeperhost.chickens.blockentities;
 
 import net.creeperhost.chickens.containers.ContainerHenhouse;
 import net.creeperhost.chickens.init.ModBlocks;
@@ -26,7 +26,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -283,4 +282,4 @@ public class BlockEntityHenhouse extends BlockEntity implements MenuProvider
     {
         return new ContainerHenhouse(id, inventory, this, containerData);
     }
-}
+}*/
