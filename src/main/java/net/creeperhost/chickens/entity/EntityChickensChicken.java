@@ -54,8 +54,8 @@ public class EntityChickensChicken extends Chicken
     {
         super(entityType, worldIn);
         this.entityType = entityType;
-        setChickenType(entityType.getRegistryName().toString());
-        setChickenTypeInternal(entityType.getRegistryName().toString());
+        setChickenType(this.getChickenTypeInternal());
+        setChickenTypeInternal(this.getChickenTypeInternal());
     }
 
     public static AttributeSupplier.Builder prepareAttributes()
@@ -142,13 +142,13 @@ public class EntityChickensChicken extends Chicken
             return null;
         }
 
-        EntityChickensChicken newChicken = (EntityChickensChicken) entityType.create(level);
+        EntityChickensChicken newChicken = (EntityChickensChicken) entityType.create(level());
         newChicken.setChickenType(childToBeBorn.getRegistryName().toString());
 
         boolean mutatingStats = chickenDescription.getRegistryName() == mateChickenDescription.getRegistryName() && childToBeBorn.getRegistryName() == chickenDescription.getRegistryName();
         if (mutatingStats)
         {
-            increaseStats(newChicken, this, mateChicken, random);
+            increaseStats(newChicken, this, mateChicken, new Random());
         } else if (chickenDescription.getRegistryName() == childToBeBorn.getRegistryName())
         {
             inheritStats(newChicken, this);
@@ -188,7 +188,7 @@ public class EntityChickensChicken extends Chicken
     @Override
     public void tick()
     {
-        if (!this.level.isClientSide && !this.isBaby() && !this.isChickenJockey())
+        if (!this.level().isClientSide && !this.isBaby() && !this.isChickenJockey())
         {
             int newTimeUntilNextEgg = eggTime - 1;
             setTimeUntilNextEgg(newTimeUntilNextEgg);
@@ -207,12 +207,12 @@ public class EntityChickensChicken extends Chicken
                     itemToLay.grow(chickenDescription.createLayItem().getCount());
                 }
 
-                itemToLay = BlockEntityHenhouse.pushItemStack(itemToLay, level, new Vec3(getX(), getY(), getZ()));
+                itemToLay = BlockEntityHenhouse.pushItemStack(itemToLay, level(), new Vec3(getX(), getY(), getZ()));
 
                 if (itemToLay != null && !itemToLay.isEmpty())
                 {
-                    ItemEntity itemEntity = new ItemEntity(level, getX(), getY(), getZ(), chickenDescription.createLayItem());
-                    level.addFreshEntity(itemEntity);
+                    ItemEntity itemEntity = new ItemEntity(level(), getX(), getY(), getZ(), chickenDescription.createLayItem());
+                    level().addFreshEntity(itemEntity);
                     playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 }
 

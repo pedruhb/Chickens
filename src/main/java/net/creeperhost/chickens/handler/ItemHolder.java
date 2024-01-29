@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -38,21 +39,21 @@ public class ItemHolder
 
     public ItemHolder()
     {
-        itemID = Items.AIR.getRegistryName().toString();
+        itemID = Items.AIR.toString();
         nbtData = null;
         stack = ItemStack.EMPTY;
     }
 
     public ItemHolder(Item itemIn)
     {
-        itemID = itemIn.getRegistryName().toString();
+        itemID = itemIn.toString();
         nbtData = null;
         stack = ItemStack.EMPTY;
     }
 
     public ItemHolder(ItemStack stackIn, boolean isFinal)
     {
-        itemID = stackIn.getItem().getRegistryName().toString();
+        itemID = stackIn.getItem().toString();
         stack = stackIn;
         nbtData = stackIn.hasTag() ? stackIn.getTag() : null;
         stackSize = stackIn.getCount();
@@ -100,7 +101,8 @@ public class ItemHolder
     @Nullable
     public Item getItem()
     {
-        return Registry.ITEM.get(new ResourceLocation(this.itemID));
+        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.itemID)).asItem();
+        //return Registry.ITEM.get(new ResourceLocation(this.itemID));
     }
 
     public int getStackSize()
@@ -156,7 +158,8 @@ public class ItemHolder
 
     public ItemHolder readJsonObject(JsonObject data) throws NumberFormatException
     {
-        itemID = data.has("itemID") ? data.get("itemID").getAsString() : Items.AIR.getRegistryName().toString();
+        
+        itemID = data.has("itemID") ? data.get("itemID").getAsString() : Items.AIR.toString();
         stackSize = data.has("qty") ? data.get("qty").getAsInt() : 1;
 
         nbtRawJson = data.has("nbt") ? data.get("nbt").getAsJsonObject() : null;
