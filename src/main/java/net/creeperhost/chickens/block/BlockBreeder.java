@@ -38,7 +38,7 @@ public class BlockBreeder extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player,
             InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide) {
-            NetworkHooks.openGui((ServerPlayer) player, (MenuProvider) level.getBlockEntity(blockPos), blockPos);
+            NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) level.getBlockEntity(blockPos), blockPos);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.SUCCESS;

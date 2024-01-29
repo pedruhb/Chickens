@@ -14,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -33,8 +32,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -142,7 +141,7 @@ public class BlockEntityRoost extends BlockEntity implements MenuProvider
                     {
                         level.playSound(null, getBlockPos(), SoundEvents.CHICKEN_EGG, SoundSource.NEUTRAL, 0.5F, 0.8F);
 
-                        spawnParticle(level, getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), level.random);
+                        spawnParticle(level, getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), null);
                         progress = 0;
                     }
                 }
@@ -230,7 +229,7 @@ public class BlockEntityRoost extends BlockEntity implements MenuProvider
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, final @Nullable Direction side)
     {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (cap == ForgeCapabilities.ITEM_HANDLER)
         {
             return LazyOptional.of(() -> inventory).cast();
         }
@@ -257,7 +256,7 @@ public class BlockEntityRoost extends BlockEntity implements MenuProvider
     @Override
     public @NotNull Component getDisplayName()
     {
-        return new TextComponent("chickens.container.roost");
+        return Component.translatable("chickens.container.roost");
     }
 
     @org.jetbrains.annotations.Nullable
