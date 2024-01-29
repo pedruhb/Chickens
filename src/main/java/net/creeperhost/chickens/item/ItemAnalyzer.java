@@ -3,7 +3,6 @@ package net.creeperhost.chickens.item;
 import net.creeperhost.chickens.entity.EntityChickensChicken;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,14 +26,14 @@ public class ItemAnalyzer extends Item
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
         super.appendHoverText(stack, level, components, tooltipFlag);
-        components.add(new TranslatableComponent("item.analyzer.tooltip1"));
-        components.add(new TranslatableComponent("item.analyzer.tooltip2"));
+        components.add(Component.translatable("item.analyzer.tooltip1"));
+        components.add(Component.translatable("item.analyzer.tooltip2"));
     }
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack itemStack, Player playerIn, LivingEntity target, InteractionHand hand)
     {
-        if (target.level.isClientSide || !(target instanceof EntityChickensChicken))
+        if (target.level().isClientSide || !(target instanceof EntityChickensChicken))
         {
             return InteractionResult.FAIL;
         }
@@ -43,24 +42,25 @@ public class ItemAnalyzer extends Item
         chicken.setStatsAnalyzed(true);
 
         Component chickenName = chicken.getName();
-        playerIn.sendMessage(chickenName, Util.NIL_UUID);
+        
+        playerIn.sendSystemMessage(chickenName);
 
-        playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.tier", chicken.getTier()), Util.NIL_UUID);
+        playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.tier", chicken.getTier()));
 
-        playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.growth", chicken.getGrowth()), Util.NIL_UUID);
-        playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.gain", chicken.getGain()), Util.NIL_UUID);
-        playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.strength", chicken.getStrength()), Util.NIL_UUID);
+        playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.growth", chicken.getGrowth()));
+        playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.gain", chicken.getGain()));
+        playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.strength", chicken.getStrength()));
 
         if (!chicken.isBaby())
         {
             int layProgress = chicken.getLayProgress();
             if (layProgress <= 0)
             {
-                playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.nextEggSoon"), Util.NIL_UUID);
+                playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.nextEggSoon"));
             }
             else
             {
-                playerIn.sendMessage(new TranslatableComponent("entity.ChickensChicken.layProgress", layProgress), Util.NIL_UUID);
+                playerIn.sendSystemMessage(Component.translatable("entity.ChickensChicken.layProgress", layProgress));
             }
         }
         return InteractionResult.PASS;

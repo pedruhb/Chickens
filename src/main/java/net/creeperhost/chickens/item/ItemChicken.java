@@ -11,8 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.IItemRenderProperties;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -36,7 +33,7 @@ public class ItemChicken extends Item
         super(properties);
     }
 
-    @Override
+    /*@Override
     public void fillItemCategory(@NotNull CreativeModeTab tab, @NotNull NonNullList<ItemStack> subItems)
     {
         if(this.allowdedIn(tab))
@@ -48,7 +45,7 @@ public class ItemChicken extends Item
                 subItems.add(itemstack);
             }
         }
-    }
+    }*/
 
     @Override
     public @NotNull InteractionResult useOn(UseOnContext useOnContext)
@@ -75,13 +72,13 @@ public class ItemChicken extends Item
         ChickenStats chickenStats = new ChickenStats(itemStack);
         if(Screen.hasShiftDown())
         {
-            components.add(new TranslatableComponent("entity.ChickensChicken.top.growth").append(" " + chickenStats.getGrowth()).withStyle(ChatFormatting.DARK_PURPLE));
-            components.add(new TranslatableComponent("entity.ChickensChicken.top.gain").append(" " + chickenStats.getGain()).withStyle(ChatFormatting.DARK_PURPLE));
-            components.add(new TranslatableComponent("entity.ChickensChicken.top.strength").append(" " + chickenStats.getStrength()).withStyle(ChatFormatting.DARK_PURPLE));
+            components.add(Component.translatable("entity.ChickensChicken.top.growth").append(" " + chickenStats.getGrowth()).withStyle(ChatFormatting.DARK_PURPLE));
+            components.add(Component.translatable("entity.ChickensChicken.top.gain").append(" " + chickenStats.getGain()).withStyle(ChatFormatting.DARK_PURPLE));
+            components.add(Component.translatable("entity.ChickensChicken.top.strength").append(" " + chickenStats.getStrength()).withStyle(ChatFormatting.DARK_PURPLE));
         }
         else
         {
-            components.add(new TranslatableComponent("gui.hold.shift.tooltip"));
+            components.add(Component.translatable("gui.hold.shift.tooltip"));
         }
     }
 
@@ -89,8 +86,8 @@ public class ItemChicken extends Item
     public @NotNull Component getName(@NotNull ItemStack stack)
     {
         ChickensRegistryItem chickenDescription = ChickensRegistry.getByRegistryName(getTypeFromStack(stack));
-        if(chickenDescription == null) return new TextComponent("Any Chicken");
-        return new TranslatableComponent("entity.chickens." + chickenDescription.getEntityName());
+        if(chickenDescription == null) return Component.literal("Any Chicken");
+        return Component.translatable("entity.chickens." + chickenDescription.getEntityName());
     }
 
     public static void applyEntityIdToItemStack(ItemStack stack, ResourceLocation entityId)
@@ -114,10 +111,9 @@ public class ItemChicken extends Item
             return chickentag.getString("id");
         }
         return null;
-    }
+    } 
 
-
-    @Override
+    /*@Override
     public void initializeClient(Consumer<IItemRenderProperties> consumer)
     {
         consumer.accept(new IItemRenderProperties() {
@@ -126,5 +122,5 @@ public class ItemChicken extends Item
                 return RenderChickenItem.getInstance();
             }
         });
-    }
+    }*/
 }

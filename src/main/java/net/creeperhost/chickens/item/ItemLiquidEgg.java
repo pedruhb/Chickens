@@ -3,20 +3,12 @@ package net.creeperhost.chickens.item;
 import net.creeperhost.chickens.handler.IColorSource;
 import net.creeperhost.chickens.handler.LiquidEggFluidWrapper;
 import net.creeperhost.chickens.init.ModItems;
-import net.creeperhost.chickens.registry.LiquidEggRegistry;
 import net.creeperhost.chickens.registry.LiquidEggRegistryItem;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -25,7 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,10 +38,11 @@ public class ItemLiquidEgg extends Item implements IColorSource
         String[] strings = stack.getTag().get("id").toString().replace("\"", "").split(":");
 
         ResourceLocation resourceLocation = new ResourceLocation(strings[0], strings[1]);
-        Fluid fluid = Registry.FLUID.get(resourceLocation);
+        Fluid fluid = ForgeRegistries.FLUIDS.getValue(resourceLocation);
         if (fluid != null)
         {
-            return fluid.getAttributes().getColor();
+            //todo return fluid.getAttributes().getColor();
+            return 1;
         }
         return 0;
     }
@@ -57,10 +51,10 @@ public class ItemLiquidEgg extends Item implements IColorSource
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> components, TooltipFlag tooltipFlag)
     {
         super.appendHoverText(itemStack, level, components, tooltipFlag);
-        components.add(new TranslatableComponent("item.liquid_egg.tooltip"));
+        components.add(Component.translatable("item.liquid_egg.tooltip"));
     }
 
-    @Override
+    /*@Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> subItems)
     {
         if (this.allowdedIn(tab))
@@ -70,13 +64,13 @@ public class ItemLiquidEgg extends Item implements IColorSource
                 subItems.add(of(liquid));
             }
         }
-    }
+    }*/
 
     public static ItemStack of(LiquidEggRegistryItem liquidEggRegistryItem)
     {
         ItemStack stack = new ItemStack(ModItems.LIQUID_EGG.get());
         CompoundTag compoundTag = new CompoundTag();
-        compoundTag.putString("id", liquidEggRegistryItem.getFluid().getRegistryName().toString());
+        compoundTag.putString("id", liquidEggRegistryItem.getFluid().toString());
         stack.setTag(compoundTag);
         return stack;
     }
@@ -85,7 +79,7 @@ public class ItemLiquidEgg extends Item implements IColorSource
     {
         ItemStack stack = new ItemStack(ModItems.LIQUID_EGG.get());
         CompoundTag compoundTag = new CompoundTag();
-        compoundTag.putString("id", fluidStack.getFluid().getRegistryName().toString());
+        compoundTag.putString("id", fluidStack.getFluid().toString());
         stack.setTag(compoundTag);
         return stack;
     }
@@ -96,7 +90,7 @@ public class ItemLiquidEgg extends Item implements IColorSource
         if (!stack.hasTag()) return super.getName(stack);
 
         String[] strings = stack.getTag().getString("id").split(":");
-        return new TranslatableComponent("item.liquid_egg." + strings[1] + ".name");
+        return Component.translatable("item.liquid_egg." + strings[1] + ".name");
     }
 
     @Override
@@ -118,7 +112,7 @@ public class ItemLiquidEgg extends Item implements IColorSource
     public Fluid getFluid(ItemStack stack)
     {
         String id = stack.getTag().getString("id");
-        return Registry.FLUID.get(new ResourceLocation(id));
+        return ForgeRegistries.FLUIDS.getValue(new ResourceLocation(id));
     }
 
     @Nullable

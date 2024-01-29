@@ -6,13 +6,13 @@ import net.creeperhost.chickens.init.ModItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 public class ItemChickenCatcher extends Item
 {
@@ -22,13 +22,13 @@ public class ItemChickenCatcher extends Item
     }
 
     @Override
-    public @NotNull InteractionResult interactLivingEntity(@NotNull ItemStack itemStack, @NotNull Player player, @NotNull LivingEntity livingEntity, @NotNull InteractionHand hand)
-    {
+    public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity livingEntity, InteractionHand hand) {
+
         if(livingEntity instanceof EntityChickensChicken entityChickensChicken)
         {
-            Level level = livingEntity.getLevel();
+            Level level = livingEntity.level();
             ItemStack chicken = new ItemStack(ModItems.CHICKEN_ITEM.get());
-            ItemChicken.applyEntityIdToItemStack(chicken, entityChickensChicken.getType().getRegistryName());
+            ItemChicken.applyEntityIdToItemStack(chicken, EntityType.getKey(livingEntity.getType()));
             if(chicken.getTag() != null)
             {
                 chicken.getTag().putBoolean("baby", entityChickensChicken.isBaby());

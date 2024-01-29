@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.compat.jei;
+/*package net.creeperhost.chickens.compat.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.creeperhost.chickens.ChickensMod;
@@ -109,3 +109,4 @@ public class ChickenLayingCategory implements IRecipeCategory<ChickenLayingCateg
         }
     }
 }
+*/

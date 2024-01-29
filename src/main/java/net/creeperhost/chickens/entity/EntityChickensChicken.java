@@ -112,6 +112,7 @@ public class EntityChickensChicken extends Chicken
 
     private ChickensRegistryItem getChickenDescription()
     {
+        /* todo
         ChickensRegistryItem description = ChickensRegistry.getByRegistryName(entityType.getRegistryName().toString());
         if (description == null || !description.isEnabled())
         {
@@ -122,6 +123,10 @@ public class EntityChickensChicken extends Chicken
             }
         }
         return description;
+         */
+
+         return ChickensRegistry.getByResourceLocation(ChickensRegistry.SMART_CHICKEN_ID);
+         
     }
 
     public int getTier()

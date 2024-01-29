@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.compat.jei;
+/*package net.creeperhost.chickens.compat.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.creeperhost.chickens.ChickensMod;
@@ -27,7 +27,7 @@ import java.util.List;
 public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingCategory.Recipe>
 {
     public static final ResourceLocation UID = new ResourceLocation(ChickensMod.MODID, "chicken_breeding");
-    public static final Component TITLE = new TranslatableComponent("gui.breeding");
+    public static final Component TITLE = Component.translatable("gui.breeding");
     IGuiHelper guiHelper;
 
     public ChickenBreedingCategory(IGuiHelper guiHelper)
@@ -118,3 +118,4 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingC
         }
     }
 }
+*/

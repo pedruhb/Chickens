@@ -1,33 +1,21 @@
 package net.creeperhost.chickens.events;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.creeperhost.chickens.ChickensMod;
 import net.creeperhost.chickens.entity.EntityChickensChicken;
-import net.creeperhost.chickens.init.ModEntities;
 import net.creeperhost.chickens.registry.ChickensRegistry;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = ChickensMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEvents
@@ -36,7 +24,8 @@ public class ForgeEvents
     static DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS =
     DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, ChickensMod.MODID);
 
-    @SubscribeEvent
+    //todo
+    /*@SubscribeEvent
     public static void onBiomeLoading(BiomeLoadingEvent event)
     {
         ModEntities.SPAWNABLE_CHICKENS.forEach(entityType ->
@@ -47,7 +36,7 @@ public class ForgeEvents
             }
             catch (Exception ignored){}
         });
-    }
+    }*/
 
     @SubscribeEvent
     public static void playerInteractEvent(PlayerInteractEvent.EntityInteract event)
@@ -60,7 +49,7 @@ public class ForgeEvents
             Entity entity = event.getTarget();
             if(entity.getType() == EntityType.CHICKEN)
             {
-                EntityType<?> entityType = Registry.ENTITY_TYPE.get(ChickensRegistry.SMART_CHICKEN_ID);
+                EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(ChickensRegistry.SMART_CHICKEN_ID);
                 EntityChickensChicken chicken = (EntityChickensChicken) entityType.create(level);
                 if(chicken != null)
                 {

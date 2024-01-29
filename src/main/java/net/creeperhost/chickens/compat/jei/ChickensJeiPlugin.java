@@ -1,4 +1,4 @@
-package net.creeperhost.chickens.compat.jei;
+/*package net.creeperhost.chickens.compat.jei;
 
 import mezz.jei.api.constants.RecipeTypes;
 import net.creeperhost.chickens.ChickensMod;
@@ -122,3 +122,4 @@ public class ChickensJeiPlugin implements IModPlugin
         return ID;
     }
 }
+*/

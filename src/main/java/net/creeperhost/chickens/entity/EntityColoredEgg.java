@@ -1,23 +1,23 @@
 package net.creeperhost.chickens.entity;
 
 import net.creeperhost.chickens.init.ModItems;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+<<<<<<< HEAD
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.registries.ForgeRegistries;
+=======
+import net.minecraftforge.registries.ForgeRegistries;
+
+>>>>>>> edb01ed7ad2ab4c923e8d6133e40719b5d7f2bd0
 import org.jetbrains.annotations.NotNull;
 
 public class EntityColoredEgg extends ThrowableItemProjectile
@@ -62,14 +62,20 @@ public class EntityColoredEgg extends ThrowableItemProjectile
         setChickenType(tagCompound.getString(TYPE_NBT));
     }
 
-    @Override
+    //todo
+    /*@Override
     public void onHitEntity(@NotNull EntityHitResult entityHitResult)
     {
         super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
         int i = entity instanceof Blaze ? 3 : 0;
+<<<<<<< HEAD
         entity.hurt(damageSources().thrown(this, this.getOwner()), (float) i);
     }
+=======
+        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float) i);
+    }*/
+>>>>>>> edb01ed7ad2ab4c923e8d6133e40719b5d7f2bd0
 
     @Override
     public void onHit(@NotNull HitResult hitResult)
